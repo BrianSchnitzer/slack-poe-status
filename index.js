@@ -12,8 +12,9 @@ var options = {
   request: {},
   response: {},
   accounts: [],
+  league: 'perandus', //TODO
   slackToken: '',
-  webkookURL: '',
+  webhookURL: '',
   customColor: '',
   customChannel: ''
 }
@@ -46,23 +47,26 @@ function getPoEStatus (options) {
         if(!_.isEmpty(account) && _.isObject(account)){
           var value = '';
           var accountName = '';
-          _.chain(account)
-            .sortBy(function(char){
-              return -char.level;
-            })
-            .forEach(function(char){
-              accountName = char.accountName;
-              value += ' - ' + char.charName;
 
-              if(char.level >= 50){
-                var xp = Math.round((char.experience - levelEXP[char.level])/(levelEXP[parseInt(char.level, 10) + 1] - levelEXP[char.level])*100)/100;
-                value += ' (' + (parseInt(char.level, 10) + xp) + ')';
-              }else{
-                value += ' (' + char.level + ')';
-              }
+          var sortedChars = _.sortBy(account, function(char){
+            return -char.level;
+          });
 
-              value += (char.online === '1' ? ' -- Online' : '') + '\n\n';
-            });
+          _.forEach(sortedChars, function(char){
+            options.response.send(char);
+            accountName = char.accountName;
+            value += ' - ' + char.charName;
+
+            if(char.level >= 50){
+              var xp = Math.round((char.experience - levelEXP[char.level])/(levelEXP[parseInt(char.level, 10) + 1] - levelEXP[char.level])*100)/100;
+              value += ' (' + (parseInt(char.level, 10) + xp) + ')';
+            }else{
+              value += ' (' + char.level + ')';
+            }
+
+            value += (char.online === '1' ? ' -- Online' : '') + '\n\n';
+          });
+
           var person = {
             "title": accountName,
             "value": value,
@@ -83,7 +87,7 @@ function getPoEStatus (options) {
         })
       };
 
-      sendWebhookCall(message, options.webHookURL);
+      sendWebhookCall(message, options.webhookURL);
     }
 
   }else{
