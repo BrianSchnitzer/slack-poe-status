@@ -1,6 +1,6 @@
 {
   "name": "slack-poe-status",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Report status of PoE accounts to a Slack chat client",
   "main": "index.js",
   "scripts": {

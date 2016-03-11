@@ -1,7 +1,7 @@
 var Q = require('q');
 var _ = require('lodash');
 var request = require('request');
-var experience = require('./assets/js/experience.js');
+var experience = require('./assets/experience.js');
 
 module.exports = {
   getPoEStatus: getPoEStatus
