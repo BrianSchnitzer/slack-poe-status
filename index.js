@@ -53,7 +53,6 @@ function getPoEStatus (options) {
           });
 
           _.forEach(sortedChars, function(char){
-            options.response.send(char);
             accountName = char.accountName;
             value += ' - ' + char.charName;
 
@@ -78,7 +77,7 @@ function getPoEStatus (options) {
       });
 
       var message = {
-        "channel": "#" + options.customChannel || channel,
+        "channel": "#" + (options.customChannel || channel),
         "fallback": "PoE Status",
         "color": options.customColor || "#AE2C1A",
         "fields": _.sortBy(fields, function(field){
