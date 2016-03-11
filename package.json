@@ -1,0 +1,28 @@
+{
+  "name": "slack-poe-status",
+  "version": "0.1.0",
+  "description": "Report status of PoE accounts to a Slack chat client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrianSchnitzer/slack-poe-status.git"
+  },
+  "keywords": [
+    "slack",
+    "poe"
+  ],
+  "author": "Brian Schnitzer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrianSchnitzer/slack-poe-status/issues"
+  },
+  "homepage": "https://github.com/BrianSchnitzer/slack-poe-status#readme",
+  "dependencies": {
+    "lodash": "^4.6.1",
+    "q": "^1.4.1",
+    "request": "^2.69.0"
+  }
+}
