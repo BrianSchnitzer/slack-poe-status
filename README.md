@@ -78,9 +78,9 @@ in which the call originated.
 
 ### Usage Examples
 
-#### Explicit Tests
-In this example, test1 and test2 are explicitly declared, and a pairing polyfill will be searched for.  The task will then produce a
-set of all potential combinations of the files: test1.js, test2.js, and test1-test2.js.
+#### Only required options
+
+In this example, only the required options are passed, and the status check will report the status for the three given accounts.
 
 ```js
 var slackPoEStatus = require('slack-poe-status');
