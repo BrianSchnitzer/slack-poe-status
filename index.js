@@ -7,19 +7,6 @@ module.exports = {
   getPoEStatus: getPoEStatus
 };
 
-/*
-var options = {
-  request: {},
-  response: {},
-  accounts: [],
-  league: 'perandus', //TODO
-  slackToken: '',
-  webhookURL: '',
-  customColor: '',
-  customChannel: ''
-}
- */
-
 //Public factory function
 function getPoEStatus (options) {
 
@@ -35,7 +22,7 @@ function getPoEStatus (options) {
     var allPromises = [];
 
     _.forEach(options.accounts, function(account){
-      allPromises.push(getPoEAccountInfo(account));
+      allPromises.push(getPoEAccountInfo(account, options.league));
     });
 
     Q.all(allPromises).done(handleData);
@@ -96,12 +83,12 @@ function getPoEStatus (options) {
 }
 
 //Private functions
-function getPoEAccountInfo (accountName) {
+function getPoEAccountInfo (accountName, league) {
   var deferred = Q.defer();
 
   //Get the ladder stats for this account
   request({
-    url: 'http://api.exiletools.com/ladder?league=perandus&short=1&accountName='+accountName,
+    url: 'http://api.exiletools.com/ladder?league=' + league + '&short=1&accountName='+accountName,
     method: 'GET',
     json: true
   }, function(error, resp, body){
