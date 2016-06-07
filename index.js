@@ -45,10 +45,12 @@ function getPoEStatus (options) {
 
             if(char.level >= 50){
               var xp = Math.round((char.experience - levelEXP[char.level])/(levelEXP[parseInt(char.level, 10) + 1] - levelEXP[char.level])*100)/100;
-              value += ' (' + (parseInt(char.level, 10) + xp) + ')';
+              value += ' [' + (parseInt(char.level, 10) + xp) + '%, ';
             }else{
-              value += ' (' + char.level + ')';
+              value += ' [' + char.level + '%, ';
             }
+
+            value += ' #' + char.rank + ']';
 
             value += (char.online === '1' ? ' -- Online' : '') + '\n\n';
           });
@@ -62,6 +64,8 @@ function getPoEStatus (options) {
           fields.push(person);
         }
       });
+
+      Boomdog [50%, #4500]
 
       var message = {
         "channel": "#" + (options.customChannel || channel),
