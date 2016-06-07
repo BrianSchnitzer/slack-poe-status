@@ -45,10 +45,12 @@ function getPoEStatus (options) {
 
             if(char.level >= 50){
               var xp = Math.round((char.experience - levelEXP[char.level])/(levelEXP[parseInt(char.level, 10) + 1] - levelEXP[char.level])*100)/100;
-              value += ' (' + (parseInt(char.level, 10) + xp) + ')';
+              value += ' [' + (parseInt(char.level, 10) + xp) + '%, ';
             }else{
-              value += ' (' + char.level + ')';
+              value += ' [' + char.level + '%, ';
             }
+
+            value += '#' + char.rank + ']';
 
             value += (char.online === '1' ? ' -- Online' : '') + '\n\n';
           });
@@ -68,8 +70,9 @@ function getPoEStatus (options) {
         "fallback": "PoE Status",
         "color": options.customColor || "#AE2C1A",
         "fields": _.sortBy(fields, function(field){
-          var match = field.value.match(/\(([^)]+)\)/);
-          return -match[1];
+          console.log(field.value);
+          var match = field.value.match(/#([0-9]+)]/);
+          return match[1];
         })
       };
 
